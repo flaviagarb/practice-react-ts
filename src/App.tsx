@@ -1,4 +1,7 @@
+import LoginPage from "./pages/adverts/auth/login-page";
+
 function App() {
-  return <div> Hola a todos!! </div>;
+  return <LoginPage />;
 }
+
 export default App;
