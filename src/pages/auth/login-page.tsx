@@ -1,5 +1,6 @@
-import { FormEvent } from "react";
+import type { FormEvent } from "react";
 import { login } from "./service";
+import Button from "../../components/ui/button";
 
 function LoginPage() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -22,7 +23,9 @@ function LoginPage() {
         <input type="text" name="email" />
         <label>Password</label>
         <input type="password" name="password" />
-        <button type="submit">Login</button>
+        <Button type="submit" variant="primary">
+          Login
+        </Button>
       </form>
     </div>
   );
