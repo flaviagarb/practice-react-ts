@@ -15,7 +15,7 @@ function AdvertsPage({ active }: AdvertsPageProps) {
   useEffect(() => {
     async function getAdverts() {
       const adverts = await getLatestAdverts();
-      setAdverts(adverts.data);
+      setAdverts(adverts);
     }
     getAdverts();
   }, []);
