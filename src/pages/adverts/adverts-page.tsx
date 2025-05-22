@@ -2,19 +2,28 @@ import { useState, useEffect } from "react";
 import Button from "../../components/ui/button";
 import { getLatestAdverts } from "./service";
 import type { Adverts } from "./types";
+import { logout } from "../auth/service";
 
 interface AdvertsPageProps {
   active: boolean;
+  onLogout: () => void;
 }
 
-function AdvertsPage({ active }: AdvertsPageProps) {
+function AdvertsPage({ active, onLogout }: AdvertsPageProps) {
   const [adverts, setAdverts] = useState<Adverts[]>([]);
 
   useEffect(() => {
-    getLatestAdverts().then((response) => {
-      setAdverts(response.data);
-    });
+    async function getAdverts() {
+      const adverts = await getLatestAdverts();
+      setAdverts(adverts.data);
+    }
+    getAdverts();
   }, []);
+
+  const handleLogoutClick = async () => {
+    await logout();
+    onLogout();
+  };
 
   return (
     <div>
@@ -26,7 +35,9 @@ function AdvertsPage({ active }: AdvertsPageProps) {
           </li>
         ))}
       </ul>
-      <Button variant="primary">Click me</Button>
+      <Button disabled={false} variant="secondary" onClick={handleLogoutClick}>
+        Logout
+      </Button>
     </div>
   );
 }
