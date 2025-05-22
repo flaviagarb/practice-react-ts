@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
-import Button from "../../components/ui/button";
 import { getLatestAdverts } from "./service";
 import type { Adverts } from "./types";
-import { logout } from "../auth/service";
+import Layout from "../../components/ui/layout/layout";
 
 interface AdvertsPageProps {
   active: boolean;
   onLogout: () => void;
+  isLogged: boolean;
 }
 
-function AdvertsPage({ active, onLogout }: AdvertsPageProps) {
+function AdvertsPage({ active }: AdvertsPageProps) {
   const [adverts, setAdverts] = useState<Adverts[]>([]);
 
   useEffect(() => {
@@ -20,25 +20,19 @@ function AdvertsPage({ active, onLogout }: AdvertsPageProps) {
     getAdverts();
   }, []);
 
-  const handleLogoutClick = async () => {
-    await logout();
-    onLogout();
-  };
-
   return (
-    <div>
-      <h1>Adverts Page</h1>
-      <ul>
-        {adverts.map((advert) => (
-          <li key={advert.name}>
-            {advert.name} - {advert.price}€ - {advert.tags.join(", ")}
-          </li>
-        ))}
-      </ul>
-      <Button disabled={false} variant="secondary" onClick={handleLogoutClick}>
-        Logout
-      </Button>
-    </div>
+    <Layout title="Home Page">
+      <div>
+        <h1>Adverts Page</h1>
+        <ul>
+          {adverts.map((advert) => (
+            <li key={advert.name}>
+              {advert.name} - {advert.price}€ - {advert.tags.join(", ")}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Layout>
   );
 }
 
