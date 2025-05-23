@@ -2,6 +2,8 @@ import { useState, type ChangeEvent, type FormEvent } from "react";
 import { login } from "./service";
 import Button from "../../components/ui/button";
 import { useAuth } from "./context";
+import FormField from "../../components/ui/form-field";
+import "./login-page.css";
 
 function LoginPage() {
   const { onLogin } = useAuth();
@@ -34,12 +36,18 @@ function LoginPage() {
     <div>
       <h1> Log in to Nodepop 2.0 </h1>
       <form onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input type="text" name="email" value={email} onChange={handleChange} />
-        <label>Password</label>
-        <input
+        <FormField
+          type="text"
+          name="email"
+          label="email"
+          value={email}
+          onChange={handleChange}
+        />
+
+        <FormField
           type="password"
           name="password"
+          label="password"
           value={password}
           onChange={handleChange}
         />

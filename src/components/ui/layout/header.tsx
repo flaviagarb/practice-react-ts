@@ -1,27 +1,15 @@
-import { useAuth } from "../../../pages/auth/context";
-import { logout } from "../../../pages/auth/service";
-import Button from "../button";
 import Strawberry from "../icons/strawberry";
+import AuthButton from "../../../pages/auth/auth-button.tsx";
+import "./header.css";
 
 function Header() {
-  const { isLogged, onLogout } = useAuth();
-
-  const handleLogoutClick = async () => {
-    await logout();
-    onLogout();
-  };
-
   return (
-    <header>
-      <Strawberry />
-      <nav>
-        {isLogged ? (
-          <Button variant="secondary" onClick={handleLogoutClick}>
-            Logout
-          </Button>
-        ) : (
-          <Button variant="primary">Login</Button>
-        )}
+    <header className="header">
+      <div className="header-logo">
+        <Strawberry />
+      </div>
+      <nav className="header-nav">
+        <AuthButton />
       </nav>
     </header>
   );

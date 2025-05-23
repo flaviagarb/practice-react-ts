@@ -4,7 +4,13 @@ import { useAuth } from "./pages/auth/context";
 
 function App() {
   const { isLogged } = useAuth();
-  return isLogged ? <AdvertsPage active /> : <LoginPage />;
+  return isLogged ? (
+    <>
+      <AdvertsPage />
+    </>
+  ) : (
+    <LoginPage />
+  );
 }
 
 export default App;

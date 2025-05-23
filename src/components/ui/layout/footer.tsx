@@ -1,5 +1,7 @@
+import "./footer.css";
+
 function Footer() {
-  return <footer>@2025 Keepcoding</footer>;
+  return <footer className="footer">@2025 Keepcoding</footer>;
 }
 
 export default Footer;

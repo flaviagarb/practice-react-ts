@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Footer from "./footer";
 import Header from "./header";
+import "./layout.css";
 
 interface LayoutProps {
   title: string;
@@ -9,9 +10,9 @@ interface LayoutProps {
 
 function Layout({ title, children }: LayoutProps) {
   return (
-    <div>
+    <div className="layout">
       <Header />
-      <main>
+      <main className="layout-main">
         <h2>{title}</h2>
         {children}
       </main>

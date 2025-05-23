@@ -10,7 +10,7 @@ interface AdvertsPageProps {
   isLogged: boolean;
 }
 
-function AdvertsPage({ active }: AdvertsPageProps) {
+function AdvertsPage() {
   const [adverts, setAdverts] = useState<Adverts[]>([]);
 
   useEffect(() => {
