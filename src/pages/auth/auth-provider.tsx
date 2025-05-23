@@ -20,7 +20,7 @@ function AuthProvider({ defaultIsLogged, children }: AuthProviderProps) {
   const authValue = {
     isLogged,
     onLogin: handleLogin,
-    onlogout: handleLogout,
+    onLogout: handleLogout,
   };
 
   return (

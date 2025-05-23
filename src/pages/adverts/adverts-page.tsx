@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getLatestAdverts } from "./service";
 import type { Adverts } from "./types";
 import Layout from "../../components/ui/layout/layout";
+import profile from "../../assets/profile.svg";
 
 interface AdvertsPageProps {
   active: boolean;
@@ -22,6 +23,7 @@ function AdvertsPage({ active }: AdvertsPageProps) {
 
   return (
     <Layout title="Home Page">
+      <img src={profile} alt="Default profile" />
       <div>
         <h1>Adverts Page</h1>
         <ul>

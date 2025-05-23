@@ -1,6 +1,7 @@
 import { useAuth } from "../../../pages/auth/context";
 import { logout } from "../../../pages/auth/service";
 import Button from "../button";
+import Strawberry from "../icons/strawberry";
 
 function Header() {
   const { isLogged, onLogout } = useAuth();
@@ -12,7 +13,7 @@ function Header() {
 
   return (
     <header>
-      <div></div>
+      <Strawberry />
       <nav>
         {isLogged ? (
           <Button variant="secondary" onClick={handleLogoutClick}>
