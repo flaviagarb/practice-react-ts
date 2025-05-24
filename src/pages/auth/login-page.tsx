@@ -5,8 +5,11 @@ import { useAuth } from "./context";
 import FormField from "../../components/ui/form-field";
 import Page from "../../components/ui/layout/page";
 import "./login-page.css";
+import { useLocation, useNavigate } from "react-router";
 
 function LoginPage() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const { onLogin } = useAuth();
   const [credentials, setCredentials] = useState({
     email: "",
@@ -28,13 +31,17 @@ function LoginPage() {
     try {
       await login(credentials);
       onLogin();
+
+      // Navigate to the page in state.from
+      const to = location.state?.from ?? "/";
+      navigate(to, { replace: true });
     } catch (error) {
       console.error(error);
     }
   }
 
   return (
-    <Page title="Log in to your area here">
+    <Page title="Log in to NodePop 2.0">
       <div className="login-page-wrapper">
         <div className="login-page-box">
           <form onSubmit={handleSubmit}>
