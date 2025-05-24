@@ -6,6 +6,7 @@ import FormField from "../../components/ui/form-field";
 import Page from "../../components/ui/layout/page";
 import "./login-page.css";
 import { useLocation, useNavigate } from "react-router";
+import { AxiosError } from "axios";
 
 function LoginPage() {
   const location = useLocation();
@@ -15,8 +16,11 @@ function LoginPage() {
     email: "",
     password: "",
   });
+  const [error, setError] = useState<{ message: string } | null>(null);
+  const [isFetching, setIsFetching] = useState<boolean>(false);
+
   const { email, password } = credentials;
-  const disabled = !email || !password;
+  const disabled = !email || !password || isFetching;
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setCredentials((prevCredentials) => ({
@@ -29,6 +33,7 @@ function LoginPage() {
     event.preventDefault();
 
     try {
+      setIsFetching(true);
       await login(credentials);
       onLogin();
 
@@ -36,12 +41,18 @@ function LoginPage() {
       const to = location.state?.from ?? "/";
       navigate(to, { replace: true });
     } catch (error) {
-      console.error(error);
+      if (error instanceof AxiosError) {
+        setError({
+          message: error.response?.data?.message ?? error.message ?? "",
+        });
+      }
+    } finally {
+      setIsFetching(false);
     }
   }
 
   return (
-    <Page title="Log in to NodePop 2.0">
+    <Page title="Log in to NodePop">
       <div className="login-page-wrapper">
         <div className="login-page-box">
           <form onSubmit={handleSubmit}>
@@ -64,6 +75,17 @@ function LoginPage() {
               Log in
             </Button>
           </form>
+          {error && (
+            <div
+              className="login-page-error"
+              role="alert"
+              onClick={() => {
+                setError(null);
+              }}
+            >
+              {error.message}
+            </div>
+          )}
         </div>
       </div>
     </Page>

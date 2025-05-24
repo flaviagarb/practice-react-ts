@@ -3,7 +3,7 @@
   min-height: calc(100vh - 128px);
   margin: 0 auto;
   border-style: solid;
-  border-color: #721422;
+  border-color: rgb(var(--color-border));
 }
 
 @media (max-width: 660px) {
@@ -14,9 +14,13 @@
 
 .layout-title {
   align-items: center;
-  border-style: solid;
-  border-color: #721422;
+  justify-content: center;
   display: flex;
-  height: 52px;
+  height: 64px;
   padding: 0 15px;
+  border-bottom: 1px solid rgb(var(--color-border));
+  font-size: 28px;
+  font-family: "Times New Roman", serif;
+  color: rgb(var(--color-primary-text));
+  text-align: center;
 }

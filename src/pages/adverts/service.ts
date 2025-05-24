@@ -16,3 +16,9 @@ export const createAdvert = async (advertData: FormData) => {
   });
   return response.data;
 };
+
+export const getAdvert = async (advertId: string) => {
+  const url = `${ADVERTS_URL}/${advertId}`;
+  const response = await client.get<Adverts>(url);
+  return response.data;
+};
