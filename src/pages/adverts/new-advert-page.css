@@ -1,0 +1,48 @@
+/* new-advert-page.css */
+
+.new-advert-page-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 15px;
+}
+
+.new-advert-page-label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  color: #721422;
+  /* color pop */
+}
+
+.new-advert-page-input,
+.new-advert-page-select,
+.new-advert-page-file {
+  font-size: 16px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+.new-advert-page-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.new-advert-page-submit {
+  background-color: #721422;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.new-advert-page-submit:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

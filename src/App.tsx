@@ -1,15 +1,21 @@
 import LoginPage from "./pages/auth/login-page";
 import AdvertsPage from "./pages/adverts/adverts-page";
-import { useAuth } from "./pages/auth/context";
+import { Navigate, Routes, Route } from "react-router";
+import NewAdvertPage from "./pages/adverts/new-advert-page";
+import Layout from "./components/ui/layout/layout";
 
 function App() {
-  const { isLogged } = useAuth();
-  return isLogged ? (
-    <>
-      <AdvertsPage />
-    </>
-  ) : (
-    <LoginPage />
+  return (
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/adverts" element={<Layout />}>
+        <Route index element={<AdvertsPage />} />
+        <Route path="new" element={<NewAdvertPage />} />
+      </Route>
+      <Route path="/" element={<Navigate to="/adverts" />} />
+      <Route path="/404" element={<div> 404 | Not Found </div>} />
+      <Route path="*" element={<Navigate to="/404" />} />
+    </Routes>
   );
 }
 

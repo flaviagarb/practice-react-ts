@@ -1,11 +1,16 @@
  @import "tailwindcss";
 
  :root {
-   --color-primary-text: 51, 0, 25;
-   --color-secondary-text: 102, 20, 61;
+   --color-primary-text: 0, 0, 0;
+   /* negro */
+   --color-secondary-text: 51, 0, 25;
+   /* vino oscuro */
    --color-border: 255, 204, 221;
+   /* rosa claro pastel */
    --color-danger: 190, 20, 70;
+   /* rosa fresa fuerte */
    --color-twitter: 255, 105, 180;
+   /* rosa chicle brillante */
  }
 
  * {

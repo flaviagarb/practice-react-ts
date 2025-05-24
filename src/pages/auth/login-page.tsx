@@ -3,6 +3,7 @@ import { login } from "./service";
 import Button from "../../components/ui/button";
 import { useAuth } from "./context";
 import FormField from "../../components/ui/form-field";
+import Page from "../../components/ui/layout/page";
 import "./login-page.css";
 
 function LoginPage() {
@@ -33,29 +34,32 @@ function LoginPage() {
   }
 
   return (
-    <div>
-      <h1> Log in to Nodepop 2.0 </h1>
-      <form onSubmit={handleSubmit}>
-        <FormField
-          type="text"
-          name="email"
-          label="email"
-          value={email}
-          onChange={handleChange}
-        />
+    <Page title="Log in to your area here">
+      <div className="login-page-wrapper">
+        <div className="login-page-box">
+          <form onSubmit={handleSubmit}>
+            <FormField
+              type="text"
+              name="email"
+              label="email"
+              value={email}
+              onChange={handleChange}
+            />
 
-        <FormField
-          type="password"
-          name="password"
-          label="password"
-          value={password}
-          onChange={handleChange}
-        />
-        <Button type="submit" variant="primary" disabled={disabled}>
-          Log in
-        </Button>
-      </form>
-    </div>
+            <FormField
+              type="password"
+              name="password"
+              label="password"
+              value={password}
+              onChange={handleChange}
+            />
+            <Button type="submit" variant="primary" disabled={disabled}>
+              Log in
+            </Button>
+          </form>
+        </div>
+      </div>
+    </Page>
   );
 }
 

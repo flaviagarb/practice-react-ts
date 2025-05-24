@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 import { getLatestAdverts } from "./service";
 import type { Adverts } from "./types";
-import Layout from "../../components/ui/layout/layout";
-import profile from "../../assets/profile.svg";
+import Page from "../../components/ui/layout/page";
+import Button from "../../components/ui/button";
+import AdvertItem from "./advert-item";
+import { Link } from "react-router";
 
-interface AdvertsPageProps {
-  active: boolean;
-  onLogout: () => void;
-  isLogged: boolean;
-}
+const EmptyList = () => (
+  <div className="">
+    <p>Be the first one!</p>
+    <Button variant="primary">Create Advert</Button>
+  </div>
+);
 
 function AdvertsPage() {
   const [adverts, setAdverts] = useState<Adverts[]>([]);
@@ -22,19 +25,23 @@ function AdvertsPage() {
   }, []);
 
   return (
-    <Layout title="Home Page">
-      <img src={profile} alt="Default profile" />
-      <div>
-        <h1>Adverts Page</h1>
-        <ul>
-          {adverts.map((advert) => (
-            <li key={advert.name}>
-              {advert.name} - {advert.price}€ - {advert.tags.join(", ")}
-            </li>
-          ))}
-        </ul>
+    <Page title="Buy now">
+      <div className="advert-list">
+        {adverts.length ? (
+          <ul className="advert-list">
+            {adverts.map((advert) => (
+              <li key={advert.id}>
+                <Link to={`/adverts/${advert.id}`}>
+                  <AdvertItem adverts={advert} />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <EmptyList />
+        )}
       </div>
-    </Layout>
+    </Page>
   );
 }
 
