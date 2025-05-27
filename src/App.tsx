@@ -1,6 +1,6 @@
 import LoginPage from "./pages/auth/login-page";
 import AdvertsPage from "./pages/adverts/adverts-page";
-import { Navigate, Routes, Route } from "react-router";
+import { Navigate, Routes, Route } from "react-router-dom";
 import NewAdvertPage from "./pages/adverts/new-advert-page";
 import Layout from "./components/ui/layout/layout";
 import RequireAuth from "./pages/auth/require-auth";

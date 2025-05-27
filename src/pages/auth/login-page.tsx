@@ -1,12 +1,20 @@
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import {
+  useRef,
+  useState,
+  useEffect,
+  type ChangeEvent,
+  type FormEvent,
+} from "react";
 import { login } from "./service";
 import Button from "../../components/ui/button";
 import { useAuth } from "./context";
 import FormField from "../../components/ui/form-field";
 import Page from "../../components/ui/layout/page";
 import "./login-page.css";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
+import { createPortal } from "react-dom";
+import copyStyles from "../../utils/copyStyles";
 
 function LoginPage() {
   const location = useLocation();
@@ -18,6 +26,20 @@ function LoginPage() {
   });
   const [error, setError] = useState<{ message: string } | null>(null);
   const [isFetching, setIsFetching] = useState<boolean>(false);
+  const timeoutRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    timeoutRef.current = setTimeout(() => {
+      console.log("Timeout", timeoutRef.current);
+    }, 20000);
+    console.log("creating timeout", timeoutRef.current);
+
+    return () => {
+      if (timeoutRef.current) {
+        clearInterval(timeoutRef.current);
+      }
+    };
+  }, []);
 
   const { email, password } = credentials;
   const disabled = !email || !password || isFetching;
@@ -92,4 +114,27 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+function LoginPagePortal() {
+  const portalContainer = useRef<HTMLDivElement>(document.createElement("div"));
+
+  useEffect(() => {
+    portalContainer.current.className = "container";
+
+    const externalWindow = window.open("", "", "width=600, height=500");
+
+    if (externalWindow) {
+      externalWindow.document.body.appendChild(portalContainer.current);
+      copyStyles(window.document, externalWindow.document);
+    }
+
+    return () => {
+      if (externalWindow) {
+        externalWindow.close();
+      }
+    };
+  }, []);
+
+  return createPortal(<LoginPage />, portalContainer.current);
+}
+
+export default LoginPagePortal;

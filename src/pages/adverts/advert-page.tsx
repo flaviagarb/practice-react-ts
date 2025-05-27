@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 import Page from "../../components/ui/layout/page";
 import { useEffect, useState } from "react";
 import type { Adverts } from "./types";

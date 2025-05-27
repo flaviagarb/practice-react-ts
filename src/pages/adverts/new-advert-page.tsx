@@ -5,6 +5,7 @@ import Page from "../../components/ui/layout/page";
 import FormField from "../../components/ui/form-field";
 import "./new-advert-page.css";
 import { createAdvert } from "./service";
+import { AxiosError } from "axios";
 
 const TAGS = ["lifestyle", "mobile", "motor", "work"];
 
@@ -32,10 +33,14 @@ function NewAdvertPage() {
     if (photo) formData.append("photo", photo);
 
     try {
-      await createAdvert(formData);
-      navigate("/adverts");
+      const createdAdvert = await createAdvert(formData);
+      navigate(`/adverts/${createdAdvert.id}`);
     } catch (error) {
-      console.error("Error creating advert", error);
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 401) {
+          navigate("/login", { replace: true });
+        }
+      }
     }
   };
 

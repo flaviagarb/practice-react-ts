@@ -5,7 +5,7 @@ import App from "./App.tsx";
 import storage from "./utils/storage.ts";
 import { setAuthorizationHeader } from "./api/client.ts";
 import AuthProvider from "./pages/auth/auth-provider.tsx";
-import { BrowserRouter } from "react-router";
+import { BrowserRouter } from "react-router-dom";
 
 const accesToken = storage.get("auth");
 if (accesToken) {
