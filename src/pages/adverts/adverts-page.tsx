@@ -25,7 +25,7 @@ function AdvertsPage() {
   }, []);
 
   return (
-    <Page title="Buy now">
+    <Page title="Adverts Page">
       {adverts.length ? (
         <div className="advert-list">
           {adverts.map((advert) => (
