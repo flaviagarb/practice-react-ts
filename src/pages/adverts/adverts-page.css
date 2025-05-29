@@ -25,3 +25,58 @@
 .new-advert-page-submit {
   margin-left: auto;
 }
+
+.filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 24px 0;
+  padding: 16px;
+  background-color: #fff0f3;
+  /* suave con tu color */
+  border: 1px solid #721422;
+  border-radius: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  color: #721422;
+  font-size: 14px;
+}
+
+.filter-select {
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  color: #721422;
+}
+
+.filter-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-tag-label {
+  background-color: #fff;
+  border: 1px solid #721422;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 13px;
+  color: #721422;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.filter-tag-label:hover {
+  background-color: #f4dce2;
+}

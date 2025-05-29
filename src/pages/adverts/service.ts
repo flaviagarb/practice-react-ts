@@ -5,6 +5,7 @@ const ADVERTS_URL = "/api/v1/adverts";
 
 export const getLatestAdverts = async () => {
   const response = await client.get<Adverts[]>(ADVERTS_URL);
+  // Add validate data with Zod in future
   return response.data;
 };
 
