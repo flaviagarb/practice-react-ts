@@ -24,6 +24,8 @@ function LoginPage() {
     email: "",
     password: "",
   });
+
+  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState<{ message: string } | null>(null);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const timeoutRef = useRef<number | null>(null);
@@ -57,6 +59,10 @@ function LoginPage() {
     try {
       setIsFetching(true);
       await login(credentials);
+
+      if (rememberMe) {
+        localStorage.setItem("isLogged", "true");
+      }
       onLogin();
 
       // Navigate to the page in state.from
@@ -93,6 +99,14 @@ function LoginPage() {
               value={password}
               onChange={handleChange}
             />
+            <label style={{ display: "block", margin: "12px 0" }}>
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+              />{" "}
+              Remember me
+            </label>
             <Button type="submit" variant="primary" disabled={disabled}>
               Log in
             </Button>
