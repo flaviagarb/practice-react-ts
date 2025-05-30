@@ -23,3 +23,8 @@ export const getAdvert = async (advertId: string) => {
   const response = await client.get<Adverts>(url);
   return response.data;
 };
+
+export const deleteAdvert = async (advertId: string) => {
+  const url = `${ADVERTS_URL}/${advertId}`;
+  await client.delete(url);
+};
