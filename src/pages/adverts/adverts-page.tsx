@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getLatestAdverts } from "./service";
+import { getLatestAdverts, getTags } from "./service";
 import type { Adverts } from "./types";
 import Page from "../../components/ui/layout/page";
 import Button from "../../components/ui/button";
@@ -17,14 +17,25 @@ const EmptyList = () => (
 function AdvertsPage() {
   const [adverts, setAdverts] = useState<Adverts[]>([]);
   const [filterSale, setFilterSale] = useState("");
+  const [availableTags, setAvailableTags] = useState<string[]>([]);
   const [filterTags, setFilterTags] = useState<string[]>([]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     async function getAdverts() {
       const adverts = await getLatestAdverts();
       setAdverts(adverts);
     }
     getAdverts();
+  }, []); */
+
+  useEffect(() => {
+    async function fetchData() {
+      const adverts = await getLatestAdverts();
+      const tags = await getTags();
+      setAdverts(adverts);
+      setAvailableTags(tags);
+    }
+    fetchData();
   }, []);
 
   const filteredAdverts = adverts.filter((advert) => {
@@ -55,7 +66,7 @@ function AdvertsPage() {
 
         <div className="filter-tags">
           Tags:
-          {["mobile", "motor", "lifestyle", "work"].map((tag) => (
+          {availableTags.map((tag) => (
             <label key={tag} className="filter-tag-label">
               <input
                 type="checkbox"

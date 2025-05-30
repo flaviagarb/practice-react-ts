@@ -8,6 +8,7 @@
 
 .advert-list li {
   display: flex;
+  height: 100%;
 }
 
 .advert-item {
@@ -35,6 +36,8 @@
 }
 
 .advert-item-details {
+  flex-grow: 1;
+  justify-content: space-between;
   padding: 16px;
   display: flex;
   flex-direction: column;

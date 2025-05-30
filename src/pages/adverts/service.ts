@@ -28,3 +28,8 @@ export const deleteAdvert = async (advertId: string) => {
   const url = `${ADVERTS_URL}/${advertId}`;
   await client.delete(url);
 };
+
+export async function getTags(): Promise<string[]> {
+  const response = await client.get("/api/v1/adverts/tags");
+  return response.data;
+}
