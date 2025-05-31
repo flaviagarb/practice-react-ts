@@ -6,6 +6,7 @@ import Button from "../../components/ui/button";
 import AdvertItem from "./advert-item";
 import { Link } from "react-router-dom";
 import "./adverts-page.css";
+import type { Tag } from "./tag-types";
 
 const EmptyList = () => (
   <div className="">
@@ -14,11 +15,13 @@ const EmptyList = () => (
   </div>
 );
 
+const VALID_TAGS: Tag[] = ["mobile", "motor", "work", "lifestyle"];
+
 function AdvertsPage() {
   const [adverts, setAdverts] = useState<Adverts[]>([]);
   const [filterSale, setFilterSale] = useState("");
-  const [availableTags, setAvailableTags] = useState<string[]>([]);
-  const [filterTags, setFilterTags] = useState<string[]>([]);
+  const [availableTags, setAvailableTags] = useState<Tag[]>([]);
+  const [filterTags, setFilterTags] = useState<Tag[]>([]);
 
   /*useEffect(() => {
     async function getAdverts() {
@@ -31,9 +34,12 @@ function AdvertsPage() {
   useEffect(() => {
     async function fetchData() {
       const adverts = await getLatestAdverts();
-      const tags = await getTags();
+      const tagsFromApi = await getTags();
+      const validTags = tagsFromApi.filter((tag): tag is Tag =>
+        VALID_TAGS.includes(tag as Tag),
+      );
       setAdverts(adverts);
-      setAvailableTags(tags);
+      setAvailableTags(validTags);
     }
     fetchData();
   }, []);
@@ -42,9 +48,11 @@ function AdvertsPage() {
     const matchesType = filterSale
       ? advert.sale === (filterSale === "sell")
       : true;
+
     const matchesTags = filterTags.length
       ? filterTags.every((tag) => advert.tags.includes(tag))
       : true;
+
     return matchesType && matchesTags;
   });
 

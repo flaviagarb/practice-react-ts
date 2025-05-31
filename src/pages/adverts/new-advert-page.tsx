@@ -27,7 +27,7 @@ function NewAdvertPage() {
 
     const formData = new FormData();
     formData.append("name", name);
-    formData.append("sale", sale);
+    formData.append("sale", (sale === "sell").toString());
     formData.append("price", price);
     tags.forEach((tag) => formData.append("tags", tag));
     if (photo) formData.append("photo", photo);

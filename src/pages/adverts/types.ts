@@ -1,8 +1,10 @@
+import type { Tag } from "./tag-types";
+
 export interface Adverts {
   id: number;
   name: string;
   sale: boolean;
   price: number;
-  tags: ("lifestyle" | "mobile" | "motor" | "work")[];
+  tags: Tag[];
   photo?: string;
 }

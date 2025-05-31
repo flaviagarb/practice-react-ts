@@ -61,15 +61,13 @@ function AdvertPage() {
             style={{ maxWidth: "400px", margin: "0 auto" }}
           >
             <img
-              src={advert.photo}
+              src={advert.photo || "/descarga.png"}
               alt={advert.name}
               className="advert-item-image"
             />
             <div className="advert-item-details">
               <h2 className="advert-item-title">{advert.name}</h2>
-              <p className="advert-item-type">
-                {advert.sale ? "Venta" : "Compra"}
-              </p>
+              <p className="advert-item-type">{advert.sale ? "Sell" : "Buy"}</p>
               <div className="advert-item-tags">
                 {advert.tags.map((tag) => (
                   <span key={tag} className="advert-item-tag">
