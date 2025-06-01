@@ -11,8 +11,22 @@ function App() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/adverts" element={<Layout />}>
-        <Route index element={<AdvertsPage />} />
-        <Route path=":advertId" element={<AdvertPage />} />
+        <Route
+          index
+          element={
+            <RequireAuth>
+              <AdvertsPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path=":advertId"
+          element={
+            <RequireAuth>
+              <AdvertPage />
+            </RequireAuth>
+          }
+        />
         <Route
           path="new"
           element={
@@ -23,7 +37,14 @@ function App() {
         />
       </Route>
       <Route path="/" element={<Navigate to="/adverts" />} />
-      <Route path="/404" element={<div> 404 | Not Found </div>} />
+      <Route
+        path="/404"
+        element={
+          <RequireAuth>
+            <div> 404 | Not Found </div>
+          </RequireAuth>
+        }
+      />
       <Route path="*" element={<Navigate to="/404" />} />
     </Routes>
   );

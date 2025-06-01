@@ -13,8 +13,6 @@ import Page from "../../components/ui/layout/page";
 import "./login-page.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
-import { createPortal } from "react-dom";
-import copyStyles from "../../utils/copyStyles";
 
 function LoginPage() {
   const location = useLocation();
@@ -58,12 +56,8 @@ function LoginPage() {
 
     try {
       setIsFetching(true);
-      await login(credentials);
-
-      if (rememberMe) {
-        localStorage.setItem("isLogged", "true");
-      }
-      onLogin();
+      const accessToken = await login(credentials);
+      onLogin(rememberMe, accessToken);
 
       // Navigate to the page in state.from
       const to = location.state?.from ?? "/";
@@ -128,27 +122,4 @@ function LoginPage() {
   );
 }
 
-function LoginPagePortal() {
-  const portalContainer = useRef<HTMLDivElement>(document.createElement("div"));
-
-  useEffect(() => {
-    portalContainer.current.className = "container";
-
-    const externalWindow = window.open("", "", "width=600, height=500");
-
-    if (externalWindow) {
-      externalWindow.document.body.appendChild(portalContainer.current);
-      copyStyles(window.document, externalWindow.document);
-    }
-
-    return () => {
-      if (externalWindow) {
-        externalWindow.close();
-      }
-    };
-  }, []);
-
-  return createPortal(<LoginPage />, portalContainer.current);
-}
-
-export default LoginPagePortal;
+export default LoginPage;

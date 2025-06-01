@@ -11,14 +11,18 @@ function AuthProvider({ defaultIsLogged, children }: AuthProviderProps) {
     return localStorage.getItem("isLogged") === "true" || defaultIsLogged;
   });
 
-  function handleLogin() {
+  function handleLogin(rememberMe: boolean, accessToken: string) {
     setIsLogged(true);
-    localStorage.setItem("isLogged", "true");
+    if (rememberMe) {
+      localStorage.setItem("isLogged", "true");
+      localStorage.setItem("auth", accessToken);
+    }
   }
 
   function handleLogout() {
     setIsLogged(false);
     localStorage.removeItem("isLogged");
+    localStorage.removeItem("auth");
   }
 
   const authValue = {
